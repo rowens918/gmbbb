@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">GM\'s Big Black Box</string>
+    <string name="app_name_abbreviated">GMBBB</string>
+    <string name="title_npccard_detail">NPC Detail</string>
+    <string name="title_new_npccard">Add NPC</string>
+
+    <!-- AdMob ID String -->
+    <string name="adMobIDString">ca-app-pub-3940256099942544~3347511713</string>
+
+    <!-- Add New NPC Card Labels -->
+    <string name="title_new_npccard_name">Name: </string>
+    <string name="title_new_npccard_role">Role: </string>
+    <string name="title_new_npccard_game">Game: </string>
+    <string name="title_new_npccard_stats">Stats: </string>
+    <string name="title_new_npccard_skills">Skills: </string>
+    <string name="title_new_npccard_description">Description: </string>
+    <string name="title_new_npccard_history">History: </string>
+    <string name="title_new_npccard_attitude">Attitude: </string>
+
+    <string name="button_label_save">Save</string>
+    <string name="button_label_update">Update</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+</resources>
