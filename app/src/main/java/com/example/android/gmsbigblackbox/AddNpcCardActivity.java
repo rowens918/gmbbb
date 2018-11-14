@@ -3,13 +3,13 @@ package com.example.android.gmsbigblackbox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.android.gmsbigblackbox.database.AppDatabase;
 import com.example.android.gmsbigblackbox.database.NpcCardEntry;
-
 import java.util.Date;
 
 public class AddNpcCardActivity extends AppCompatActivity {
@@ -33,6 +33,12 @@ public class AddNpcCardActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setExitTransition(new Slide());
+        getWindow().setEnterTransition(new Slide());
+
         setContentView(R.layout.activity_addnewnpccard);
 
         initViews();

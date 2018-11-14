@@ -1,8 +1,10 @@
 package com.example.android.gmsbigblackbox;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,17 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Html;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import com.example.android.gmsbigblackbox.database.AppDatabase;
 import com.example.android.gmsbigblackbox.database.NpcCardEntry;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 import static android.support.v7.widget.RecyclerView.VERTICAL;
 
 /**
@@ -42,15 +52,23 @@ public class NpcCardListActivity extends AppCompatActivity implements NpcAdapter
     private NpcAdapter mAdapter;
     private RecyclerView recyclerView;
     private AdView mAdView;
+    private static AnalyticsApplication application;
+    private static Tracker mTracker;
 
     private AppDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Set Transitions
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setExitTransition(new Slide());
+        getWindow().setEnterTransition(new Slide());
+
         setContentView(R.layout.activity_npccard_list);
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, getString(R.string.adMobIDString));
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -132,13 +150,18 @@ public class NpcCardListActivity extends AppCompatActivity implements NpcAdapter
             NpcCardDetailFragment fragment = new NpcCardDetailFragment();
             fragment.setArguments(arguments);
             NpcCardListActivity mParentActivity = this;
+
+            HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder();
+            eventBuilder.setAction("Select").setCategory("NPC").setValue(1L).setLabel("usage");
+            AnalyticsApplication.tracker().send(eventBuilder.build());
+
             mParentActivity.getSupportFragmentManager().beginTransaction()
                     .replace(R.id.npccard_detail_container, fragment)
                     .commit();
         } else {
             Intent intent = new Intent(NpcCardListActivity.this, NpcCardDetailActivity.class);
             intent.putExtra(NpcCardDetailActivity.EXTRA_NPC_ID, itemId);
-            startActivity(intent);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         }
     }
 }

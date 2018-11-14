@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.example.android.gmsbigblackbox.database.AppDatabase;
@@ -21,7 +22,8 @@ public class NpcWidget extends AppWidgetProvider {
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_npc);
-        views.setTextViewText(R.id.widget_tv_name, widgetText);
+        views.setTextViewText(R.id.widget_default_tv, widgetText);
+        views.setViewVisibility(R.id.widget_default_tv, View.VISIBLE);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -50,6 +52,7 @@ public class NpcWidget extends AppWidgetProvider {
 
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, NpcWidget.class));
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_npc);
+        remoteViews.setViewVisibility(R.id.widget_default_tv, View.GONE);
         remoteViews.setTextViewText(R.id.widget_tv_name, name);
         remoteViews.setTextViewText(R.id.widget_tv_game, game);
         remoteViews.setTextViewText(R.id.widget_tv_role, role);

@@ -3,6 +3,7 @@
     <string name="app_name_abbreviated">GMBBB</string>
     <string name="title_npccard_detail">NPC Detail</string>
     <string name="title_new_npccard">Add NPC</string>
+    <string name="fab_add_npc">Add NPC</string>
 
     <!-- AdMob ID String -->
     <string name="adMobIDString">ca-app-pub-3940256099942544~3347511713</string>
@@ -17,9 +18,15 @@
     <string name="title_new_npccard_history">History: </string>
     <string name="title_new_npccard_attitude">Attitude: </string>
 
+    <!-- Random Background Image URL -->
+    <string name="toolbar_image_url">https://picsum.photos/350/200/?random</string>
+    <string name="dnd_image_url">https://i1.wp.com/thechronicgeek.net/wp-content/uploads/2016/08/DD_Transparent.png</string>
+    <string name="sr_image_url">http://seattle-ltg.net/sr_logo_4.gif</string>
+
+
     <string name="button_label_save">Save</string>
     <string name="button_label_update">Update</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Welcome to the GM\'s Big Black Box. \nPlease launch the app to display NPC Data Here.</string>
     <string name="add_widget">Add widget</string>
 
 </resources>
